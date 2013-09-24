@@ -15,7 +15,8 @@
     "lockfile": "~0.4.2",
     "lodash": "~2.0.0",
     "node-mocks-http": "~1.0.1",
-    "temp": "~0.6.0"
+    "temp": "~0.6.0",
+    "winston": "~0.7.2"
   },
   "devDependencies": {
   },
