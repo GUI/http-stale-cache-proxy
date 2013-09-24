@@ -4,7 +4,7 @@ A non-compliant HTTP caching proxy that excels at serving stale cached content, 
 
 The basic behavior of this proxy is:
 
-* Non-cached content is transparently proxied (using [node-http-proxy](https://github.com/nodejitsu/node-http-proxy).
+* Non-cached content is transparently proxied (using [node-http-proxy](https://github.com/nodejitsu/node-http-proxy)).
   * Successful GET or HEAD requests will be cached for subsequent use.
 * Cached content will be delivered from the cache.
   * While delivering cached content to the client, the original request is also proxied to the backend. Once received, the new response will replace the existing data in the cache.
