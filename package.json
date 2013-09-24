@@ -3,7 +3,7 @@
   "description": "A non-compliant HTTP caching proxy that excels at serving stale cached content, while keeping its cache updated asynchronously.",
   "version": "0.1.0",
   "engines": ">= 0.8.0",
-  "author": "Nick Muerdter <nick.muerdter@nrel.gov>",
+  "author": "Nick Muerdter <stuff@nickm.org>",
   "main": "./lib/http-stale-cache-proxy",
   "scripts": {
     "test": "grunt"
