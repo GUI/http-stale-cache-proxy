@@ -30,7 +30,7 @@ describe('proxying', function() {
     var randomInput = Math.random().toString();
     var url = '/echo?input=' + randomInput;
 
-    var cacheKey = ['GET', url].join('');
+    var cacheKey = ['GET', 'localhost:9333', url].join('');
     var cacheBase = crypto.createHash('sha256').update(cacheKey).digest('hex');
 
     request.get('http://localhost:9333' + url, function() {
@@ -74,6 +74,20 @@ describe('proxying', function() {
     });
   });
 
+  it('separates cached content by domain', function(done) {
+    request.get({ url: 'http://localhost:9333/rand', headers: { 'Host': 'example.com' } }, function(error, response, body) {
+      var firstBody = body;
+
+      setTimeout(function() {
+        request.get({ url: 'http://localhost:9333/rand', headers: { 'Host': 'example2.com' } }, function(error, response, body) {
+          body.should.not.eql(firstBody);
+          done();
+        });
+      }, 10);
+    });
+  });
+
+
   it('caches concurrent requests to the appropriate file', function(done) {
     // Fire off 20 concurrent requests and ensure that all the cached responses
     // end up in the appropriate place.
@@ -81,7 +95,7 @@ describe('proxying', function() {
       var randomInput = Math.random().toString();
       var url = '/echo_chunked?input=' + randomInput;
 
-      var cacheKey = ['GET', url].join('');
+      var cacheKey = ['GET', 'localhost:9333', url].join('');
       var cacheBase = crypto.createHash('sha256').update(cacheKey).digest('hex');
 
       request.get('http://localhost:9333' + url, function(error, response, body) {
