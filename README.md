@@ -19,12 +19,18 @@ var httpStaleCacheProxy = require('http-stale-cache-proxy');
 
 httpStaleCacheProxy.createServer({
   changeOrigin: true,
+  noRefresh: false,
   target: {
     host: 'example.com',
     port: 80,
   },
 }).listen(8000);
 ```
+
+## Options
+
+* noRefresh : if true, proxy will prevent himself from getting an updated version of the request and serve the last cached response directly
+
 
 ## Why another proxy?
 
